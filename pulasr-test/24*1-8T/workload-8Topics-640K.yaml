@@ -1,6 +1,6 @@
-name: 8 topic / 1 partition / 1Kb / 160000 per second
+name: 16 topic / 1 partition / 1Kb / 640000 per second
 
-topics: 8
+topics: 16
 partitionsPerTopic: 1
 keyDistributor: "NO_KEY"
 messageSize: 1024
@@ -8,6 +8,6 @@ payloadFile: "payload/payload-1Kb.data"
 subscriptionsPerTopic: 1
 consumerPerSubscription: 1
 producersPerTopic: 1
-producerRate: 160000
+producerRate: 640000
 consumerBacklogSizeGB: 0
-testDurationMinutes: 5
+testDurationMinutes: 10
