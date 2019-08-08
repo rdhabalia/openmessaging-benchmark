@@ -30,6 +30,8 @@ public class PulsarClientConfig {
     public int connectionsPerBroker = 8;
 
     public String namespacePrefix;
+    
+    public boolean createNewNamespace;
 
     public TopicDomain topicType = TopicDomain.persistent;
 

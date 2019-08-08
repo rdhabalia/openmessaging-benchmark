@@ -75,35 +75,38 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>com.mycila</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<header>dev/license-header.txt</header>
-
-					<excludes>
-						<exclude>LICENSE</exclude>
-						<exclude>NOTICE</exclude>
-						<exclude>payload/**</exclude>
-						<exclude>**/*.pyc</exclude>
-						<exclude>**/.pydevproject</exclude>
-					</excludes>
-					<mapping>
-						<benchmark>SCRIPT_STYLE</benchmark>
-						<j2>SCRIPT_STYLE</j2>
-						<conf>SCRIPT_STYLE</conf>
-						<yaml>SCRIPT_STYLE</yaml>
-						<md>XML_STYLE</md>
-					</mapping>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-shade-plugin</artifactId>
+		        <version>3.1.0</version>
+		        <executions>
+		          <execution>
+		            <phase>package</phase>
+		            <goals>
+		              <goal>shade</goal>
+		            </goals>
+		            <configuration>
+		              <createDependencyReducedPom>true</createDependencyReducedPom>
+		              <promoteTransitiveDependencies>true</promoteTransitiveDependencies>
+		              <minimizeJar>false</minimizeJar>
+		              <artifactSet>
+		                <includes>
+		                  <include>*:*</include>
+		                </includes>
+		              </artifactSet>
+		              <filters>
+		                <filter>
+		                  <artifact>*:*</artifact>
+		                  <excludes>
+		                    <exclude>META-INF/*.SF</exclude>
+		                    <exclude>META-INF/*.DSA</exclude>
+		                    <exclude>META-INF/*.RSA</exclude>
+		                  </excludes>
+		                </filter>
+		              </filters>
+		            </configuration>
+		          </execution>
+		        </executions>
+		      </plugin>
 		</plugins>
 	</build>
 
@@ -125,6 +128,109 @@
 			<artifactId>jackson-dataformat-yaml</artifactId>
 			<version>2.9.3</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.yahoo.cloud.messaging.pkg</groupId>
+			<artifactId>cloud-messaging-client-auth-yca</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+		
 	</dependencies>
+	
+	<repositories>
+		<repository>
+            <!-- Repository for Open Source Athens repository -->
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-yahoo-maven</id>
+			<name>bintray</name>
+			<url>http://yahoo.bintray.com/maven</url>
+		</repository>
+        
+        <!-- java-platform -->
+        <repository>
+          <id>java-platform-snapshot</id>
+          <url>http://edge.artifactory.yahoo.com:8000/artifactory/java-platform-maven-snapshot</url>
+        </repository>
+        <repository>
+          <id>java-platform-release</id>
+          <url>http://edge.artifactory.yahoo.com:8000/artifactory/java-platform-maven-release</url>
+        </repository>
+        <!-- java-platform -->
+        
+		<repository>
+			<id>central</id>
+			<url>http://ymaven.corp.yahoo.com:9999/proximity/repository/public</url>
+		</repository>
+		 <repository>
+		      <id>bookkeeper-yahoo-mvn-repo</id>
+		      <url>https://raw.githubusercontent.com/yahoo/bookkeeper/mvn-repo</url>
+	        </repository>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<url> http://ymaven.corp.yahoo.com:9999/proximity/repository/maven2-repository.dev.java.net/</url>
+		</repository>
+        <repository>
+          <id>artifactory-releases</id>
+          <name>artifactory-releases</name>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <url>http://edge.artifactory.yahoo.com:8000/artifactory/maven-local-release</url>
+          <layout>default</layout>
+        </repository>
+        <repository>
+          <id>artifactory-snapshots</id>
+          <name>artifactory-snapshots</name>
+          <releases>
+            <enabled>false</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+          <url>http://edge.artifactory.yahoo.com:8000/artifactory/maven-local-snapshot</url>
+          <layout>default</layout>
+        </repository>
+		 <repository>
+			<id>ossrh-releases</id>
+			<name>ossrh-release</name>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<url>https://oss.sonatype.org/content/repositories/releases</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>ossrh-snapshot</id>
+			<name>ossrh-snapshot</name>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>cms-releases</id>
+			<name>cms-releases</name>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<url>http://edge.artifactory.yahoo.com:8000/artifactory/cms_java</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 
 </project>

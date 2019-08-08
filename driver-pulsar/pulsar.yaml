@@ -22,23 +22,24 @@ driverClass: io.openmessaging.benchmark.driver.pulsar.PulsarBenchmarkDriver
 
 # Pulsar client-specific configuration
 client:
-  serviceUrl: pulsar://localhost:6650
-  httpUrl: http://localhost:8080
+  serviceUrl: pulsar://perf1-broker1.messaging.gq1.yahoo.com:6650
+  httpUrl: http://perf1-broker1.messaging.gq1.yahoo.com:4080
   ioThreads: 8
   connectionsPerBroker: 8
-  namespacePrefix: benchmark/local/ns
+  namespacePrefix: cms-java-systest/perf-gq1/system
+  createNewNamespace: false
   topicType: persistent
   persistence:
-    ensembleSize: 3
-    writeQuorum: 3
+    ensembleSize: 2
+    writeQuorum: 2
     ackQuorum: 2
     deduplicationEnabled: false
   tlsAllowInsecureConnection: false
   tlsEnableHostnameVerification: false
   tlsTrustCertsFilePath:
   authentication:
-    plugin:
-    data:
+    plugin: com.yahoo.cloud.messaging.client.impl.auth.AuthenticationYcaV1
+    data: yca_appid:yahoo.cloud_messaging.yca.smoketest.env-perf
 
 # Producer configuration
 producer:
