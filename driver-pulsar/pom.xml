@@ -51,5 +51,11 @@
 			<artifactId>pulsar-client-admin-original</artifactId>
 			<version>${pulsar.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>io.openmessaging.benchmark</groupId>
+			<artifactId>benchmark-framework</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
